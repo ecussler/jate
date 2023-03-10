@@ -24,14 +24,18 @@ module.exports = () => {
       }), 
       new InjectManifest( { swSrc: './src-sw.js', swDest: 'src-sw.js' }), 
       new WebpackPwaManifest({
+        inject: true, 
         name: 'JATE - Just Another Text Editor', 
         short_name: 'JATE', 
         description: 'Just another text editor...', 
         background_color: '#000000', 
+        start_url: '/', 
+        publicPath: '/',
         icons: [
           {
             src: path.resolve('src/images/logo.png'), 
-            sizes: [96, 128, 192, 256, 384, 512]
+            sizes: [96, 128, 192, 256, 384, 512], 
+            destination: path.join('assets', 'icons')
           }
         ]
       })
@@ -39,7 +43,7 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.css#/i, 
+          test: /\.css$/i, 
           use: ['style-loader', 'css-loader'], 
         },
         {
